@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sh4dowX | Exploit Host</title>
+    <style>
+        :root {
+            --bg-color: #06070d;
+            --card-bg: #0f1222;
+            --card-hover: #161b33;
+            --accent-color: #00e5ff;
+            --text-color: #ffffff;
+            --text-secondary: #636e9a;
+            --border-color: #1b2244;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        header {
+            margin-bottom: 45px;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        h1 span {
+            color: var(--accent-color);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .firmware-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 24px 15px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--card-hover);
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            color: var(--accent-color);
+        }
+
+        .status-panel {
+            background-color: rgba(10, 12, 24, 0.85);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 20px;
+            margin-top: 25px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            text-align: left;
+        }
+
+        .footer {
+            margin-top: 55px;
+            font-size: 0.85rem;
+            color: #3d4566;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1><span>sh4dowX</span> Host</h1>
+            <p class="subtitle">Select Firmware Version</p>
+        </header>
+
+        <!-- Grid linked directly to your /patchest/ folder -->
+        <div class="firmware-grid">
+            <button class="btn" onclick="triggerPayload('pachest-1100.bin', '11.00')">FW 11.00</button>
+            <button class="btn" onclick="triggerPayload('pachest-1150.bin', '11.50')">FW 11.50</button>
+            <button class="btn" onclick="triggerPayload('pachest-1200.bin', '12.00')">FW 12.00</button>
+            <button class="btn" onclick="triggerPayload('pachest-1250.bin', '12.50')">FW 12.50</button>
+            <button class="btn" onclick="triggerPayload('patchset-1300.bin', '13.00')">FW 13.00</button>
+            <button class="btn" onclick="triggerPayload('patchset-1302.bin', '13.02')">FW 13.02</button>
+            <button class="btn" onclick="triggerPayload('patchset-1304.bin', '13.04')">FW 13.04</button>
+            <button class="btn" onclick="triggerPayload('patchset-1350.bin', '13.50')">FW 13.50</button>
+            <button class="btn" onclick="triggerPayload('patchset-1352.bin', '13.52')">FW 13.52</button>
+            <button class="btn" onclick="triggerPayload('patchset-1400.bin', '14.00')">FW 14.00</button>
+        </div>
+
+        <div class="status-panel" id="status-display">
+            [SYSTEM]: Ready. Awaiting selection...
+        </div>
+
+        <div class="footer">
+            &copy; 2026 sh4dowX
+        </div>
+    </div>
+
+    <script>
+        function triggerPayload(binFile, fwName) {
+            const display = document.getElementById('status-display');
+            display.innerHTML = `[LAUNCH]: Loading ${binFile} for FW ${fwName}...`;
+            display.style.color = '#00e5ff';
+
+            setTimeout(() => {
+                window.location.href = `./patchest/${binFile}`;
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
