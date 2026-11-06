@@ -1,0 +1,177 @@
+:root {
+    /* Sfondi i bardhë i pastër dhe dritaret gri shumë të lehta */
+    --bg: #ffffff;
+    --panel: #f8fafc;
+    --sunk: #f1f5f9;
+    --border-color: #cbd5e1;
+    
+    /* Shkrimet dhe kodet në të kaltër të ndezur */
+    --fg: #0066cc; 
+    --bright: #0044aa;
+    --dim: #0077ff;
+    --faint: #64748b;
+    
+    /* Ngjyrat standarde për statuset e suksesit ose gabimit */
+    --ok: #00aa44;
+    --bad: #ef4444;
+    --warn: #f59e0b;
+    
+    --sans: "Courier New", Courier, monospace;
+    --mono: "Courier New", Courier, monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.45 var(--sans);
+}
+
+/* Zona e titullit kryesor shadowX */
+#brand {
+    padding: 14px 10px;
+    border-bottom: 2px solid var(--border-color);
+    background: var(--panel);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+#brand b {
+    color: var(--bright);
+}
+
+#ramBox {
+    overflow: hidden;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--sunk);
+    color: var(--fg);
+    font: 12px/1.4 var(--mono);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Loading Spinner i kaltër */
+#spin {
+    position: fixed;
+    top: calc(50% + 20px);
+    left: 50%;
+    width: 46px;
+    height: 46px;
+    margin: -23px 0 0 -23px;
+    border: 4px solid var(--sunk);
+    border-top-color: var(--fg);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#msg {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+#state, #out {
+    display: none;
+}
+
+body.done #spin, body.fail #spin {
+    display: none;
+}
+
+body.fail #msg {
+    display: block;
+    color: var(--bad);
+}
+
+body.done #msg {
+    display: block;
+    color: var(--ok);
+}
+
+/* Paneli i Logjeve (Kur fillon exploit-i) */
+body.log {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+body.log #spin, body.log #msg {
+    display: none;
+}
+
+body.log #wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    padding: 14px 18px 30px;
+}
+
+body.log #state {
+    display: block;
+    margin: 0 0 8px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bright);
+}
+
+/* Kutia e zezë u kthye në të bardhë me kornizë dhe shkrim të kaltër */
+body.log #out {
+    display: block;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--panel);
+    font: 13px/1.45 var(--mono);
+    white-space: pre-wrap;
+    color: var(--fg); /* Këtu çdo kod i ri do të shkruhet në të kaltër */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.notice {
+    margin: 1em 0;
+    padding: 0.7em 1em;
+    border: 2px solid var(--bad);
+    background: #fff5f5;
+    color: var(--bad);
+    font: 700 20px/1.4 var(--sans);
+}
+
+.byline {
+    position: fixed;
+    bottom: 9px;
+    left: 11px;
+    margin: 0;
+    color: var(--faint);
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.06em;
+}
+
+.ok { color: var(--ok); }
+.bad { color: var(--bad); }
+.warn { color: var(--warn); }
+code { color: var(--dim); font-family: var(--mono); }
